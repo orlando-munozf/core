@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico CORE — Habilidades de Comunicación e Influencia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0908;
+    --bg-soft: #131110;
+    --bg-card: #1A1713;
+    --text: #F5F1E8;
+    --text-muted: #8B837A;
+    --text-dim: #5C554C;
+    --border: #2A2620;
+    --border-strong: #3D372D;
+
+    --gold: #F5C518;
+    --gold-bright: #FFD84D;
+    --gold-deep: #C99A0A;
+    --gold-glow: rgba(245, 197, 24, 0.15);
+
+    --auto: #F5C518;
+    --est: #FFD84D;
+    --inf: #E5A80A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Manrope', -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  body {
+    background-image:
+      radial-gradient(ellipse at 50% 0%, var(--gold-glow) 0%, transparent 55%),
+      radial-gradient(circle at 15% 90%, rgba(245, 197, 24, 0.04) 0%, transparent 40%);
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+  .brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+  }
+  .brand span { color: var(--gold); font-weight: 400; }
+  .brand-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .intro h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(38px, 7vw, 68px);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+  }
+  .intro h1 em {
+    font-style: italic;
+    font-weight: 300;
+    background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 50%, var(--gold-deep) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .intro .lede {
+    font-size: 17px;
+    color: var(--text-muted);
+    max-width: 560px;
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+  .intro .lede strong { color: var(--text); font-weight: 500; }
+
+  .pillars-preview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+  .pillar-item {
+    background: var(--bg-soft);
+    padding: 20px 18px;
+    position: relative;
+  }
+  .pillar-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+  .pillar-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+  .pillar-name {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .pillar-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  .start-btn {
+    background: var(--gold);
+    color: var(--bg);
+    border: none;
+    padding: 18px 32px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 0 0 0 var(--gold-glow);
+  }
+  .start-btn:hover {
+    transform: translateX(2px);
+    box-shadow: 0 0 30px 0 var(--gold-glow);
+    background: var(--gold-bright);
+  }
+  .start-btn .arrow { transition: transform 0.2s ease; }
+  .start-btn:hover .arrow { transform: translateX(4px); }
+
+  .intro-meta {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 32px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .intro-meta strong { color: var(--gold); font-weight: 600; }
+
+  .progress-wrap { margin-bottom: 56px; }
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .pillar-badge {
+    color: var(--gold);
+  }
+  .progress-bar {
+    height: 1px;
+    background: var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .progress-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-bright));
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 8px var(--gold-glow);
+  }
+
+  .question-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+  }
+  .question-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(24px, 3.8vw, 32px);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin-bottom: 44px;
+    max-width: 620px;
+  }
+
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 20px 24px;
+    font-family: inherit;
+    font-size: 15px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    line-height: 1.55;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .option:hover {
+    background: var(--bg-card);
+    border-color: var(--gold);
+    transform: translateX(3px);
+  }
+  .option-letter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    padding-top: 3px;
+    transition: color 0.2s ease;
+  }
+  .option:hover .option-letter { color: var(--gold); }
+
+  .nav-row {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .back-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 8px 0;
+    transition: color 0.2s ease;
+  }
+  .back-btn:hover { color: var(--gold); }
+  .back-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  /* RESULTS */
+  .results-intro { margin-bottom: 48px; }
+  .results-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .results-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 48px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .results-title em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 300;
+  }
+
+  /* TOTAL SCORE */
+  .total-block {
+    border: 1px solid var(--border);
+    padding: 36px 32px;
+    margin-bottom: 32px;
+    background: linear-gradient(135deg, var(--bg-soft) 0%, var(--bg-card) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .total-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .total-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .total-score {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+  .total-score-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(64px, 10vw, 96px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .total-score-max {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+  .total-level {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .total-interpretation {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  /* PILLAR BARS */
+  .pillars-block {
+    margin-bottom: 32px;
+  }
+  .pillars-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .pillar-score {
+    margin-bottom: 24px;
+  }
+  .pillar-score-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+  .pillar-score-name {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .pillar-score-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--gold);
+  }
+  .pillar-score-track {
+    height: 8px;
+    background: var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .pillar-score-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+    transition: width 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  /* STRENGTH / BLINDSPOT */
+  .insight-block {
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .insight-block.strength::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gold);
+  }
+  .insight-block.blindspot {
+    background: var(--bg-soft);
+  }
+  .insight-block.blindspot::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--border-strong);
+  }
+  .insight-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .strength .insight-label { color: var(--gold); }
+  .blindspot .insight-label { color: var(--text-muted); }
+  .insight-pillar {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+  .insight-text {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .blindspot .insight-text { color: var(--text-muted); }
+
+  /* ACTION BAR */
+  .action-bar {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+  .action-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 14px 20px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.02em;
+  }
+  .action-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .action-btn.primary {
+    background: var(--gold);
+    color: var(--bg);
+    border-color: var(--gold);
+    font-weight: 600;
+  }
+  .action-btn.primary:hover {
+    background: var(--gold-bright);
+    color: var(--bg);
+  }
+
+  .fade-in { animation: fadeIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media print {
+    body { background: white; color: black; }
+    .action-bar { display: none; }
+  }
+
+  @media (max-width: 640px) {
+    .container { padding: 24px 20px 60px; }
+    .header { margin-bottom: 32px; }
+    .primary-block, .total-block, .insight-block { padding: 24px 20px; }
+    .pillars-preview { grid-template-columns: 1fr; }
+    .pillar-item { padding: 16px 18px; }
+    .action-bar { flex-direction: column; }
+    .option { padding: 18px 20px; font-size: 14px; }
+    .intro-meta { flex-wrap: wrap; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="header">
+    <div class="brand">Método <span>CORE</span></div>
+    <div class="brand-tag" id="phase-tag">Inicio</div>
+  </header>
+
+  <main id="app"></main>
+
+</div>
+
+<script>
+// ============================================
+// PILLAR INSIGHTS
+// ============================================
+const PILLARS = {
+  AUTO: {
+    name: 'Autoconciencia',
+    short: 'Auto',
+    subtitle: 'Conocerte a fondo',
+    desc: 'Tu historia como recurso, tu emoción como material.',
+    strength: 'Tu ventaja está en que ya no comunicas desde el ego. Sabes qué disparadores emocionales traes contigo, qué historias funcionan según a quién le hablas, y cómo entrar a un cuarto sin necesitar demostrar nada. Eso te da presencia sin esfuerzo — la gente siente que estás ahí, no actuando. El riesgo: que te confíes tanto en tu presencia que descuides la estructura o la técnica. La autoconciencia sin arquitectura se queda en algo que se siente bien pero no siempre transforma.',
+    blindspot: 'Aquí es donde estás dejando kilos de influencia sobre la mesa. Todavía comunicas más desde lo que crees que debes decir que desde quien realmente eres. Eso te obliga a esforzarte más de lo necesario para conectar, porque estás compitiendo con tu propia armadura. Trabajar autoconciencia no es hacer terapia — es identificar qué de tu historia y de tu emocionalidad ya son material útil, y cuáles siguen operándote sin que tú los operes a ellos.'
+  },
+  EST: {
+    name: 'Estructura',
+    short: 'Est',
+    subtitle: 'Diseñar el mensaje',
+    desc: 'Arquitectura de productos de expresión memorables.',
+    strength: 'Sabes construir mensajes que se sostienen. Tus ideas no se caen por el camino, tus aperturas enganchan, tus cierres cierran. Tienes claridad de método — no dependes de "estar inspirado" para comunicar bien. La gente sale contigo con algo concreto, no con una sensación vaga. El riesgo: que la arquitectura se vuelva más importante que la emoción. Un mensaje perfectamente estructurado sin conexión humana convence a la cabeza pero no mueve el cuerpo.',
+    blindspot: 'Probablemente comunicas mejor de lo que la gente recuerda al día siguiente. Tienes cosas valiosas que decir, pero se pierden en la ejecución — abres tarde, te vas por ramas, cierras débil. La estructura no es rigidez ni fórmula; es respetar cómo procesan las personas cuando escuchan. Sin arquitectura, tus mejores ideas viajan a media potencia, y esa fricción la paga la audiencia con su atención, y tú con tu impacto.'
+  },
+  INF: {
+    name: 'Influencia',
+    short: 'Inf',
+    subtitle: 'Provocar acción',
+    desc: 'Voz, cuerpo y presencia al servicio del mensaje.',
+    strength: 'Sabes moverte en el escenario, sabes leer a tu audiencia y sabes ajustar sobre la marcha. Tu voz, tu cuerpo y tu presencia son parte del mensaje, no solo el vehículo. Cuando terminas de hablar, la gente no solo escuchó — sintió algo específico y salió con ganas de moverse. El riesgo: que la técnica se lleve la atención y tape lo que hay detrás. Alta influencia sin autoconciencia produce comunicadores brillantes que no siempre son creíbles.',
+    blindspot: 'Aquí está el gap entre lo que sabes y lo que logras que otros hagan. Puedes tener el mejor mensaje del cuarto y aún así no mover a nadie, porque comunicar no es lo mismo que influir. Voz, presencia y lectura del público no son cosmética — son la diferencia entre alguien que expone y alguien que persuade. La técnica se aprende, pero requiere que aceptes que hay una capa entera de la comunicación que todavía no operas conscientemente.'
+  }
+};
+
+// ============================================
+// GLOBAL INTERPRETATION BY TOTAL SCORE
+// ============================================
+const LEVELS = [
+  {
+    min: 0, max: 24,
+    name: 'En construcción',
+    text: 'Estás en la fase donde la comunicación todavía te opera a ti más de lo que tú la operas a ella. Muchos de los mecanismos que usas — cómo abres, cómo respondes bajo presión, cómo cierras — funcionan por hábito, no por método. Buena noticia: aquí es donde se aprende más rápido, porque cualquier ajuste consciente se nota de inmediato en el impacto que provocas.'
+  },
+  {
+    min: 25, max: 39,
+    name: 'Consciente',
+    text: 'Ya reconoces que comunicar es un oficio, no un talento heredado. Manejas piezas del método aunque no siempre las integres. Sabes cuándo algo funcionó y cuándo no — lo que aún no domas completo es el porqué. Tu siguiente salto está en cerrar los huecos del pilar más flojo, no en perfeccionar el que ya tienes.'
+  },
+  {
+    min: 40, max: 51,
+    name: 'Maduro',
+    text: 'Manejas los tres pilares con soltura, aunque hay uno que carga más peso que los otros. Comunicas mejor que la mayoría, y sabes por qué funciona lo que funciona. Puedes explicarle a alguien cómo lo haces, no solo hacerlo. Tu siguiente nivel no es hacer más — es afinar lo que ya haces y elegir con más precisión cuándo usar qué.'
+  },
+  {
+    min: 52, max: 60,
+    name: 'Estratégico',
+    text: 'Comunicas con arquitectura, presencia y conciencia. Tu comunicación ya no es habilidad — es método. Aquí el trabajo cambia: no se trata de mejorar más, sino de sistematizarlo para que otros puedan replicarlo. Enseñar es lo que sigue, porque lo que tú operas en automático es lo que a otros les cuesta ver.'
+  }
+];
+
+// ============================================
+// QUESTIONS
+// Each option carries a level value (1-4). Order shuffled per question
+// so patrón detection ("D is always the sophisticated one") is broken.
+// ============================================
+const QUESTIONS = [
+  // --- AUTOCONCIENCIA ---
+  {
+    pillar: 'AUTO',
+    text: 'Estás dando una presentación importante y alguien del público hace un comentario que te descoloca — te reta abiertamente. Lo que pasa en ti es:',
+    options: [
+      { text: 'Reconozco la incomodidad, respiro, y respondo desde la calma sin dejar que el reto me lleve.', value: 3 },
+      { text: 'Me pongo defensivo por dentro y busco justificarme para no perder terreno.', value: 1 },
+      { text: 'Uso la fricción como material — la nombro, la aprovecho, y la audiencia se conecta más porque me vio manejarla en vivo.', value: 4 },
+      { text: 'Me tenso, sonrío para disimular, y trato de seguir con lo que traía preparado.', value: 2 }
+    ]
+  },
+  {
+    pillar: 'AUTO',
+    text: 'Necesitas explicar por qué haces lo que haces. Tu enfoque natural es:',
+    options: [
+      { text: 'Cuento mi historia si me la piden, pero prefiero enfocarme en los datos y logros.', value: 1 },
+      { text: 'Sé exactamente qué momento de mi historia detona qué emoción, y lo uso quirúrgicamente según a quién le hablo.', value: 4 },
+      { text: 'Uso mi historia cuando la conversación lo permite, aunque a veces se siente forzado.', value: 2 },
+      { text: 'Tengo dos o tres pasajes de mi historia identificados que uso según el contexto.', value: 3 }
+    ]
+  },
+  {
+    pillar: 'AUTO',
+    text: 'Antes de una conversación importante — venta, presentación, entrevista — lo que pasa en tu cabeza es:',
+    options: [
+      { text: 'Trato de convencerme de que sí puedo, aunque hay una voz que duda.', value: 2 },
+      { text: 'Entro sabiendo exactamente qué peso tengo en esa mesa y por qué estoy ahí — la duda no es parte del setup.', value: 4 },
+      { text: 'Repaso mentalmente lo que me falta o dónde puedo quedarme corto.', value: 1 },
+      { text: 'Entro con claridad de lo que aporto, aunque reconozca lo que aún no domino.', value: 3 }
+    ]
+  },
+  {
+    pillar: 'AUTO',
+    text: 'Media hora antes de un evento donde vas a hablar, tu ritual real es:',
+    options: [
+      { text: 'Tengo un ritual específico que ya sé que me lleva al estado emocional exacto que necesito para esa audiencia.', value: 4 },
+      { text: 'Trato de distraerme para no ponerme más nervioso.', value: 2 },
+      { text: 'Tengo una rutina — respiración, calentamiento vocal, algo físico que me ancla.', value: 3 },
+      { text: 'Reviso el material una y otra vez, esperando que la ansiedad baje sola.', value: 1 }
+    ]
+  },
+  {
+    pillar: 'AUTO',
+    text: 'Después de una presentación o conversación importante, tu forma natural de revisar cómo te fue es:',
+    options: [
+      { text: 'Identifico dos o tres cosas concretas que funcionaron y dos o tres que ajustaría.', value: 3 },
+      { text: 'Espero comentarios de otros para saber si estuvo bien.', value: 1 },
+      { text: 'Reconstruyo el arco completo — dónde perdí y gané la atención, qué generó qué reacción, qué probar la próxima vez.', value: 4 },
+      { text: 'Reviso mentalmente los momentos donde sentí que me caí o me trabé.', value: 2 }
+    ]
+  },
+  // --- ESTRUCTURA ---
+  {
+    pillar: 'EST',
+    text: 'Cuando abres un mensaje importante — una llamada, una presentación, una historia — tu primer instinto es:',
+    options: [
+      { text: 'Trato de decir algo llamativo o una frase impactante para captar atención.', value: 2 },
+      { text: 'Empiezo con el contexto — quién soy, de qué voy a hablar, agradecer el tiempo.', value: 1 },
+      { text: 'Diseño la apertura para que en los primeros 30 segundos ya haya un gancho emocional, una promesa clara, y una razón concreta para quedarse.', value: 4 },
+      { text: 'Abro con algo que conecte emocionalmente con la situación específica de quien escucha.', value: 3 }
+    ]
+  },
+  {
+    pillar: 'EST',
+    text: 'Tienes que dar un mensaje importante en dos días. Tu forma real de prepararlo es:',
+    options: [
+      { text: 'Tengo una estructura clara — apertura, desarrollo, cierre — con las ideas clave por bloque.', value: 3 },
+      { text: 'Voy pensando en el camino, confío en que en el momento me va a salir.', value: 1 },
+      { text: 'Diseño con método: qué emoción quiero detonar, qué idea central, qué evidencia la soporta, qué acción quiero provocar al final.', value: 4 },
+      { text: 'Hago una lista de puntos que quiero tocar, más o menos en orden.', value: 2 }
+    ]
+  },
+  {
+    pillar: 'EST',
+    text: 'Cuando piensas en el mensaje que quieres transmitir, lo que dominas más es:',
+    options: [
+      { text: 'Mezclo los tres con intención — la emoción abre, la educación da peso, el entretenimiento sostiene la atención.', value: 4 },
+      { text: 'Entretener — hago que la gente la pase bien y no se aburra, aunque el mensaje se diluya.', value: 2 },
+      { text: 'Educar — soy bueno explicando lo que sé, aunque a veces se sienta denso.', value: 1 },
+      { text: 'Combino educación con emoción — sé enganchar y también aportar valor real.', value: 3 }
+    ]
+  },
+  {
+    pillar: 'EST',
+    text: 'Al terminar un mensaje importante, tu cierre natural es:',
+    options: [
+      { text: 'Cierro agradeciendo, resumiendo, o abriendo espacio a preguntas.', value: 1 },
+      { text: 'Diseño el cierre para que la audiencia salga sintiendo algo específico y con una acción concreta que ya sabe cómo ejecutar.', value: 4 },
+      { text: 'Trato de terminar con una frase potente que quede resonando.', value: 2 },
+      { text: 'Cierro con una acción clara que quiero que la gente tome, aunque a veces suena a "y ahora te toca a ti".', value: 3 }
+    ]
+  },
+  {
+    pillar: 'EST',
+    text: 'Vas a dar el mismo mensaje central a dos audiencias muy distintas. Tu forma de adaptarlo es:',
+    options: [
+      { text: 'Cambio los ejemplos según a quién le hablo, pero el fondo es el mismo.', value: 2 },
+      { text: 'Rediseño la estructura entera desde el ángulo emocional de cada audiencia — misma idea, arquitecturas distintas.', value: 4 },
+      { text: 'Uso el mismo mensaje — si funciona para uno, funciona para el otro.', value: 1 },
+      { text: 'Ajusto la apertura, los ejemplos, el vocabulario y el nivel de profundidad según quién esté enfrente.', value: 3 }
+    ]
+  },
+  // --- INFLUENCIA ---
+  {
+    pillar: 'INF',
+    text: 'Cuando hablas frente a un grupo, tu manejo real de la voz es:',
+    options: [
+      { text: 'Hablo como hablo siempre, no le pongo mucha atención a eso.', value: 1 },
+      { text: 'Uso volumen, pausas y ritmo con intención — sé cuándo bajar y cuándo subir.', value: 3 },
+      { text: 'Diseño mi voz como instrumento — tono, ritmo, pausas y silencios están al servicio del mensaje, no del hábito.', value: 4 },
+      { text: 'Trato de proyectar más y hablar más despacio, aunque a veces se me olvida en el momento.', value: 2 }
+    ]
+  },
+  {
+    pillar: 'INF',
+    text: 'Cuando estás frente a una audiencia, tu cuerpo:',
+    options: [
+      { text: 'Uso el movimiento con propósito — me acerco en momentos íntimos, me alejo cuando abro perspectiva.', value: 3 },
+      { text: 'Se queda quieto o hace movimientos que no controlo del todo.', value: 1 },
+      { text: 'Mi cuerpo, mi mirada y mi posición en el espacio son parte de la narrativa — cada movimiento comunica algo.', value: 4 },
+      { text: 'Trato de moverme para no verme rígido, aunque no siempre sé para qué me muevo.', value: 2 }
+    ]
+  },
+  {
+    pillar: 'INF',
+    text: 'A la mitad de tu mensaje, notas que la energía de la sala bajó. Tu respuesta natural es:',
+    options: [
+      { text: 'Me pongo más animado o hago un chiste para tratar de reactivar.', value: 2 },
+      { text: 'Diagnóstico rápido qué pasó — contenido denso, se perdió el hilo, alguien incómodo — y ajusto quirúrgicamente lo que corresponde.', value: 4 },
+      { text: 'Cambio el ritmo — hago una pregunta, cambio de posición, meto una historia corta.', value: 3 },
+      { text: 'Sigo con lo que traía preparado, esperando recuperarla más adelante.', value: 1 }
+    ]
+  },
+  {
+    pillar: 'INF',
+    text: 'Alguien te hace una pregunta que no esperabas y no sabes bien cómo responder. Tu manejo real es:',
+    options: [
+      { text: 'Pauso, valido la pregunta, y respondo lo que sí puedo mientras identifico lo que no sé.', value: 3 },
+      { text: 'Improviso una respuesta rápida para no verme mal.', value: 1 },
+      { text: 'Uso la pregunta como puente — la vuelvo tema, la conecto con mi mensaje, y salgo con más autoridad que si la hubiera tenido preparada.', value: 4 },
+      { text: 'Reconozco que no sé y prometo responder después, aunque me siento incómodo.', value: 2 }
+    ]
+  },
+  {
+    pillar: 'INF',
+    text: 'Cuando terminas de comunicar algo, tu forma de saber si tu mensaje "prendió" es:',
+    options: [
+      { text: 'Por los aplausos, comentarios positivos o caras de acuerdo.', value: 1 },
+      { text: 'Diseño desde el inicio la métrica que voy a medir, y evalúo por resultado observable, no por percepción.', value: 4 },
+      { text: 'Reviso qué acción concreta tomó la gente después — cuántos escribieron, agendaron, ejecutaron.', value: 3 },
+      { text: 'Cuento cuántos me buscaron después para hablar o preguntar.', value: 2 }
+    ]
+  }
+];
+
+// ============================================
+// STATE
+// ============================================
+let state = {
+  phase: 'intro',
+  currentIdx: 0,
+  answers: []
+};
+
+function render() {
+  const app = document.getElementById('app');
+  const tag = document.getElementById('phase-tag');
+
+  if (state.phase === 'intro') {
+    tag.textContent = 'Inicio';
+    app.innerHTML = renderIntro();
+    document.getElementById('start').onclick = () => {
+      state.phase = 'questions';
+      state.currentIdx = 0;
+      state.answers = [];
+      render();
+    };
+  } else if (state.phase === 'questions') {
+    tag.textContent = `Pregunta ${state.currentIdx + 1} de ${QUESTIONS.length}`;
+    app.innerHTML = renderQuestion();
+    const q = QUESTIONS[state.currentIdx];
+    q.options.forEach((opt, idx) => {
+      document.getElementById(`opt-${idx}`).onclick = () => answer(opt.value);
+    });
+    const back = document.getElementById('back');
+    if (back) back.onclick = () => {
+      if (state.currentIdx > 0) {
+        state.currentIdx--;
+        state.answers.pop();
+        render();
+      }
+    };
+  } else if (state.phase === 'results') {
+    tag.textContent = 'Resultado';
+    app.innerHTML = renderResults();
+    document.getElementById('restart').onclick = () => {
+      state.phase = 'intro';
+      state.currentIdx = 0;
+      state.answers = [];
+      render();
+    };
+    document.getElementById('print').onclick = () => window.print();
+  }
+}
+
+function renderIntro() {
+  return `
+    <section class="intro fade-in">
+      <h1>Diagnóstico <em>CORE</em></h1>
+      <p class="lede">
+        Tres pilares definen si comunicas o influyes. Autoconciencia, estructura, influencia. Este diagnóstico mide dónde estás en cada uno — <strong>no lo que crees que eres, lo que haces cuando importa</strong>.
+      </p>
+
+      <div class="pillars-preview">
+        <div class="pillar-item">
+          <div class="pillar-num">01</div>
+          <div class="pillar-name">Autoconciencia</div>
+          <div class="pillar-desc">Cómo usas tu historia y tu emoción como material.</div>
+        </div>
+        <div class="pillar-item">
+          <div class="pillar-num">02</div>
+          <div class="pillar-name">Estructura</div>
+          <div class="pillar-desc">Cómo diseñas mensajes que se sostienen.</div>
+        </div>
+        <div class="pillar-item">
+          <div class="pillar-num">03</div>
+          <div class="pillar-name">Influencia</div>
+          <div class="pillar-desc">Cómo mueves a otros a sentir, pensar y hacer.</div>
+        </div>
+      </div>
+
+      <button class="start-btn" id="start">
+        Comenzar diagnóstico
+        <span class="arrow">→</span>
+      </button>
+
+      <div class="intro-meta">
+        <div><strong>15</strong> escenarios</div>
+        <div><strong>5–7</strong> minutos</div>
+        <div><strong>Responde</strong> con honestidad, no con aspiración</div>
+      </div>
+    </section>
+  `;
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[state.currentIdx];
+  const progress = ((state.currentIdx) / QUESTIONS.length) * 100;
+  const pillarName = PILLARS[q.pillar].name;
+  const letters = ['A', 'B', 'C', 'D'];
+
+  return `
+    <section class="fade-in" key="q${state.currentIdx}">
+      <div class="progress-wrap">
+        <div class="progress-info">
+          <span>Pregunta ${state.currentIdx + 1} / ${QUESTIONS.length}</span>
+          <span class="pillar-badge">${pillarName}</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: ${progress}%"></div>
+        </div>
+      </div>
+
+      <div class="question-num">${String(state.currentIdx + 1).padStart(2, '0')}</div>
+      <h2 class="question-text">${q.text}</h2>
+
+      <div class="options">
+        ${q.options.map((opt, idx) => `
+          <button class="option" id="opt-${idx}">
+            <span class="option-letter">${letters[idx]}</span>
+            <span>${opt.text}</span>
+          </button>
+        `).join('')}
+      </div>
+
+      <div class="nav-row">
+        <button class="back-btn" id="back" ${state.currentIdx === 0 ? 'disabled' : ''}>← Volver</button>
+        <div class="brand-tag">CORE Method</div>
+      </div>
+    </section>
+  `;
+}
+
+function answer(value) {
+  const q = QUESTIONS[state.currentIdx];
+  state.answers.push({ pillar: q.pillar, value: value });
+  state.currentIdx++;
+  if (state.currentIdx >= QUESTIONS.length) {
+    state.phase = 'results';
+  }
+  render();
+}
+
+function renderResults() {
+  const scores = { AUTO: 0, EST: 0, INF: 0 };
+  state.answers.forEach(a => { scores[a.pillar] += a.value; });
+  const total = scores.AUTO + scores.EST + scores.INF;
+
+  // Sort pillars to find strength (highest) and blindspot (lowest)
+  const sortedPillars = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const strongestKey = sortedPillars[0][0];
+  const weakestKey = sortedPillars[2][0];
+  const strongestData = PILLARS[strongestKey];
+  const weakestData = PILLARS[weakestKey];
+
+  // Global interpretation
+  const level = LEVELS.find(l => total >= l.min && total <= l.max);
+
+  // Bars
+  const barsHtml = Object.entries(scores).map(([key, val]) => {
+    const p = PILLARS[key];
+    const pct = (val / 20) * 100;
+    return `
+      <div class="pillar-score">
+        <div class="pillar-score-head">
+          <span class="pillar-score-name">${p.name}</span>
+          <span class="pillar-score-val">${val} / 20 · ${Math.round(pct)}%</span>
+        </div>
+        <div class="pillar-score-track">
+          <div class="pillar-score-fill" style="width: ${pct}%"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  return `
+    <section class="fade-in">
+      <div class="results-intro">
+        <div class="results-eyebrow">Diagnóstico CORE — Resultado</div>
+        <h1 class="results-title">Tu lectura, <em>en limpio.</em></h1>
+      </div>
+
+      <div class="total-block">
+        <div class="total-label">Puntaje total</div>
+        <div class="total-score">
+          <span class="total-score-num">${total}</span>
+          <span class="total-score-max">/ 60</span>
+        </div>
+        <div class="total-level">${level.name}</div>
+        <p class="total-interpretation">${level.text}</p>
+      </div>
+
+      <div class="pillars-block">
+        <div class="pillars-title">Desglose por pilar</div>
+        ${barsHtml}
+      </div>
+
+      <div class="insight-block strength">
+        <div class="insight-label">Tu área más desarrollada</div>
+        <div class="insight-pillar">${strongestData.name}</div>
+        <p class="insight-text">${strongestData.strength}</p>
+      </div>
+
+      <div class="insight-block blindspot">
+        <div class="insight-label">Tu punto ciego</div>
+        <div class="insight-pillar">${weakestData.name}</div>
+        <p class="insight-text">${weakestData.blindspot}</p>
+      </div>
+
+      <div class="action-bar">
+        <button class="action-btn primary" id="restart">Reiniciar diagnóstico</button>
+        <button class="action-btn" id="print">Imprimir / Guardar PDF</button>
+      </div>
+    </section>
+  `;
+}
+
+render();
+</script>
+</body>
+</html>
